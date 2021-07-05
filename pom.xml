@@ -12,7 +12,7 @@
 	<artifactId>mercado-livre</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mercado-livre</name>
-	<description>Implementando o desafio do Mercado Livre</description>
+	<description>Implementando o desafio do mercado livre</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
