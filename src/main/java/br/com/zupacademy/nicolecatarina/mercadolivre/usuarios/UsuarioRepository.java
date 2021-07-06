@@ -1,4 +1,4 @@
-package br.com.zupacademy.nicolecatarina.mercadolivre.cadastrousuario;
+package br.com.zupacademy.nicolecatarina.mercadolivre.usuarios;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

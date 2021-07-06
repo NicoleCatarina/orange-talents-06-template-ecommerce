@@ -1,4 +1,4 @@
-package br.com.zupacademy.nicolecatarina.mercadolivre.cadastrousuario;
+package br.com.zupacademy.nicolecatarina.mercadolivre.usuarios;
 
 import br.com.zupacademy.nicolecatarina.mercadolivre.validation.annotation.UniqueValue;
 import org.hibernate.validator.constraints.Length;
