@@ -2,6 +2,7 @@ package br.com.zupacademy.nicolecatarina.mercadolivre.produto;
 
 import br.com.zupacademy.nicolecatarina.mercadolivre.categorias.Categoria;
 import br.com.zupacademy.nicolecatarina.mercadolivre.produto.caracteristicas.ProdutoCaracteristica;
+import br.com.zupacademy.nicolecatarina.mercadolivre.produto.imagem.ProdutoImagem;
 import br.com.zupacademy.nicolecatarina.mercadolivre.usuarios.Usuario;
 import io.jsonwebtoken.lang.Assert;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Produto {
@@ -33,6 +35,9 @@ public class Produto {
     private Usuario donoDoProduto;
     @CreationTimestamp
     private LocalDateTime instanteCriacao = LocalDateTime.now();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
+    private Set<ProdutoImagem> imagens;
 
     public Produto(String nome, BigDecimal valor, int quantidadeDisponivel, String descricao,
                    Set<ProdutoCaracteristica> caracteristicas, Categoria categoria, Usuario donoDoProduto) {
@@ -61,7 +66,19 @@ public class Produto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, valor, quantidadeDisponivel, descricao, caracteristicas, categoria, donoDoProduto, instanteCriacao);
+        return Objects.hash(id, nome, valor, quantidadeDisponivel, descricao, caracteristicas, categoria, donoDoProduto, instanteCriacao, imagens);
+    }
+
+    public void associarImagens(Set<String> links) {
+        this.imagens.addAll(links.stream()
+                .map(link -> new ProdutoImagem(this, link))
+                .collect(Collectors.toSet()));
+    }
+
+    public Set<String> getLinksImagens() {
+        return imagens.stream()
+                .map(ProdutoImagem::getLink)
+                .collect(Collectors.toSet());
     }
 
     public String getNome() {

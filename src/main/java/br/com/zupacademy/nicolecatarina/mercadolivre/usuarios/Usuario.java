@@ -1,5 +1,6 @@
 package br.com.zupacademy.nicolecatarina.mercadolivre.usuarios;
 
+import br.com.zupacademy.nicolecatarina.mercadolivre.produto.Produto;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import javax.print.DocFlavor;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,6 +27,9 @@ public class Usuario implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Perfil> perfis = new HashSet<>();
 
+    @OneToMany(mappedBy = "donoDoProduto", fetch = FetchType.EAGER)
+    private List<Produto> produtos;
+
     public Usuario(String login, SenhaLimpa senhaLimpa) {
         this.login = login;
         this.senha = senhaLimpa.hash();
@@ -32,6 +37,10 @@ public class Usuario implements UserDetails {
 
     @Deprecated
     public Usuario() {
+    }
+
+    public boolean eDonoDoProduto(Produto produto) {
+        return this.produtos.contains(produto);
     }
 
     public String getLogin() {
