@@ -10,18 +10,18 @@ public class NovoUsuarioRequest {
 
     @Email
     @NotBlank
-    @UniqueValue(domainClass = Usuario.class, fieldName = "email")
-    private String email;
+    @UniqueValue(domainClass = Usuario.class, fieldName = "login")
+    private String login;
     @NotBlank
     @Length(min = 6)
     private String senha;
 
-    public NovoUsuarioRequest(String email, String senha) {
-        this.email = email;
+    public NovoUsuarioRequest(String login, String senha) {
+        this.login = login;
         this.senha = senha;
     }
 
     public Usuario toModel() {
-        return new Usuario(email, new SenhaLimpa(senha));
+        return new Usuario(login, new SenhaLimpa(senha));
     }
 }
