@@ -1,6 +1,7 @@
 package br.com.zupacademy.nicolecatarina.mercadolivre.produto;
 
 import br.com.zupacademy.nicolecatarina.mercadolivre.categorias.Categoria;
+import br.com.zupacademy.nicolecatarina.mercadolivre.produto.avaliacao.ProdutoAvaliacao;
 import br.com.zupacademy.nicolecatarina.mercadolivre.produto.caracteristicas.ProdutoCaracteristica;
 import br.com.zupacademy.nicolecatarina.mercadolivre.produto.imagem.ProdutoImagem;
 import br.com.zupacademy.nicolecatarina.mercadolivre.usuarios.Usuario;
@@ -38,6 +39,9 @@ public class Produto {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
     private Set<ProdutoImagem> imagens;
+
+    @OneToMany(mappedBy = "produto")
+    private Set<ProdutoAvaliacao> avaliacoes;
 
     public Produto(String nome, BigDecimal valor, int quantidadeDisponivel, String descricao,
                    Set<ProdutoCaracteristica> caracteristicas, Categoria categoria, Usuario donoDoProduto) {
@@ -103,6 +107,10 @@ public class Produto {
 
     public String getEmailDoDonoDoProduto() {
         return this.donoDoProduto.getEmail();
+    }
+
+    public Set<ProdutoAvaliacao> getAvaliacoes() {
+        return avaliacoes;
     }
 
     public boolean possuiQuantidadeEmEstoque(Long quantidade) {
