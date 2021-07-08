@@ -4,6 +4,7 @@ import br.com.zupacademy.nicolecatarina.mercadolivre.categorias.Categoria;
 import br.com.zupacademy.nicolecatarina.mercadolivre.produto.avaliacao.ProdutoAvaliacao;
 import br.com.zupacademy.nicolecatarina.mercadolivre.produto.caracteristicas.ProdutoCaracteristica;
 import br.com.zupacademy.nicolecatarina.mercadolivre.produto.imagem.ProdutoImagem;
+import br.com.zupacademy.nicolecatarina.mercadolivre.produto.pergunta.ProdutoPergunta;
 import br.com.zupacademy.nicolecatarina.mercadolivre.usuarios.Usuario;
 import io.jsonwebtoken.lang.Assert;
 import org.hibernate.annotations.CreationTimestamp;
@@ -42,6 +43,9 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto")
     private Set<ProdutoAvaliacao> avaliacoes;
+
+    @OneToMany(mappedBy = "produto")
+    private Set<ProdutoPergunta> perguntas;
 
     public Produto(String nome, BigDecimal valor, int quantidadeDisponivel, String descricao,
                    Set<ProdutoCaracteristica> caracteristicas, Categoria categoria, Usuario donoDoProduto) {
@@ -111,6 +115,10 @@ public class Produto {
 
     public Set<ProdutoAvaliacao> getAvaliacoes() {
         return avaliacoes;
+    }
+
+    public Set<ProdutoPergunta> getPerguntas() {
+        return perguntas;
     }
 
     public boolean possuiQuantidadeEmEstoque(Long quantidade) {
