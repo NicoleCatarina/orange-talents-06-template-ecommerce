@@ -125,4 +125,8 @@ public class Produto {
         return this.quantidadeDisponivel >= quantidade;
     }
 
+    public void abateDoEstoque(Long quantidade) {
+        this.quantidadeDisponivel -= quantidade;
+    }
+
 }
