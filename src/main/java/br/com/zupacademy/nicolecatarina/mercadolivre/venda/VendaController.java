@@ -20,6 +20,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/vendas")
 public class VendaController {
+
     @Autowired
     private ApplicationEventPublisher publisher;
 
